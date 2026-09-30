@@ -23,11 +23,11 @@
   "threshold": 0.13,
   "seed": 42,
   "versions": {
-    "python": "3.12.9",
-    "numpy": "2.4.6",
-    "pandas": "3.0.5",
-    "sklearn": "1.9.0",
-    "joblib": "1.4.2"
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "sklearn": "1.9.1",
+    "joblib": "1.6.0"
   },
   "test_metrics": {
     "accuracy": 0.931,
