@@ -1,0 +1,13 @@
+{
+  "observation_id": "sample-a",
+  "machine_id": "H-022",
+  "features": {
+    "air_temperature": 299.9,
+    "process_temperature": 309.2,
+    "rpm": 1239.0,
+    "torque": 73.2,
+    "tool_wear": 82.0,
+    "vibration_rms": 2.3611486412176695,
+    "type": "M"
+  }
+}

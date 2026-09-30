@@ -1,0 +1,13 @@
+{
+  "observation_id": "missing-sensor",
+  "machine_id": "M-022",
+  "features": {
+    "air_temperature": 299.9,
+    "process_temperature": 309.2,
+    "rpm": 1539.0,
+    "torque": null,
+    "tool_wear": 132.0,
+    "vibration_rms": 2.1611486412176695,
+    "type": "M"
+  }
+}

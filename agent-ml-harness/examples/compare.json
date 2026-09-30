@@ -1,0 +1,28 @@
+[
+  {
+    "observation_id": "sample-a",
+    "machine_id": "M-022",
+    "features": {
+      "air_temperature": 299.9,
+      "process_temperature": 309.2,
+      "rpm": 1539.0,
+      "torque": 43.2,
+      "tool_wear": 132.0,
+      "vibration_rms": 2.1611486412176695,
+      "type": "M"
+    }
+  },
+  {
+    "observation_id": "sample-b",
+    "machine_id": "M-016",
+    "features": {
+      "air_temperature": 298.5,
+      "process_temperature": 308.2,
+      "rpm": 1301.0,
+      "torque": 66.3,
+      "tool_wear": 42.0,
+      "vibration_rms": 1.7349977647100605,
+      "type": "L"
+    }
+  }
+]

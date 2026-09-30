@@ -1,0 +1,43 @@
+{
+  "target": "machine_failure",
+  "features": [
+    "air_temperature",
+    "process_temperature",
+    "rpm",
+    "torque",
+    "tool_wear",
+    "vibration_rms",
+    "type"
+  ],
+  "numeric_features": [
+    "air_temperature",
+    "process_temperature",
+    "rpm",
+    "torque",
+    "tool_wear",
+    "vibration_rms"
+  ],
+  "categorical_features": [
+    "type"
+  ],
+  "threshold": 0.13,
+  "seed": 42,
+  "versions": {
+    "python": "3.12.9",
+    "numpy": "2.4.6",
+    "pandas": "3.0.5",
+    "sklearn": "1.9.0",
+    "joblib": "1.4.2"
+  },
+  "test_metrics": {
+    "accuracy": 0.931,
+    "precision": 0.3157894736842105,
+    "recall": 0.8823529411764706,
+    "f1": 0.46511627906976744,
+    "average_precision": 0.687856016076542,
+    "roc_auc": 0.9737737486298867
+  },
+  "false_negative_cost": 10,
+  "false_positive_cost": 1,
+  "scope": "Current-state classification on simulated AI4I+; not future forecasting"
+}
