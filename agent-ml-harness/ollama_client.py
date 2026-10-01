@@ -52,7 +52,10 @@ class OllamaClient:
             body["think"] = False
         if tools:
             body["tools"] = tools
+        self.last_usage = {}
         response = self.request("/api/chat", body)
+        self.last_usage = {key: value for key in ("prompt_eval_count", "eval_count")
+                           if isinstance(value := response.get(key), int) and value >= 0}
         if response.get("done_reason") == "length":
             raise OllamaError("LLM response hit the output limit; use a shorter question or fewer observations")
         message = response.get("message")

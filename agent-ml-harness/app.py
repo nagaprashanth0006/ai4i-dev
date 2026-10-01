@@ -2,6 +2,7 @@
 """CLI entry point for the local Ollama + AI4I demo."""
 import argparse
 import json
+import os
 from pathlib import Path
 import sys
 
@@ -22,6 +23,9 @@ def main():
     parser.add_argument("--json", action="store_true", help="Print the full structured response")
     parser.add_argument("--check", action="store_true", help="Check Ollama and load the saved ML pipeline")
     parser.add_argument("--require-prediction", action="store_true", help="Exit nonzero if no ML prediction completes")
+    parser.add_argument("--mlflow-uri", default=os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5001"))
+    parser.add_argument("--mlflow-experiment", default=os.environ.get("MLFLOW_EXPERIMENT_NAME", "ai4i-agent"))
+    parser.add_argument("--no-mlflow", action="store_true", help="Disable MLflow telemetry and tracing")
     args = parser.parse_args()
     if not args.check and not args.prompt:
         parser.error("--prompt is required unless using --check")
@@ -36,10 +40,17 @@ def main():
                               "threshold": tool.metadata["threshold"], "features": tool.metadata["features"]}, indent=2))
             return 0
         trace = (lambda event: print(json.dumps(event), file=sys.stderr, flush=True)) if args.trace else None
-        result = run_agent(args.prompt, tool, client, args.max_rounds, trace)
+        if args.no_mlflow:
+            result = run_agent(args.prompt, tool, client, args.max_rounds, trace)
+        else:
+            from telemetry import Telemetry
+            telemetry = Telemetry(args.mlflow_uri, args.mlflow_experiment)
+            result = telemetry.run(args.prompt, tool, client, args.max_rounds, trace)
         if args.json:
             print(json.dumps(result, indent=2, allow_nan=False))
         else:
+            if "mlflow" in result:
+                print(f"MLflow run: {result['mlflow']['run_id']} | trace: {result['mlflow']['trace_id']}")
             print(f"Workflow status: {result['status']}")
             if not result["raw_ml_outputs"]:
                 print("No ML prediction was produced for this request.")
